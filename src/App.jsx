@@ -10,8 +10,12 @@ import Hero from "./components/Hero";
 import HeroContent from "./components/HeroContent";
 import HeroIllustration from "./components/HeroIllustration";
 import illustrationWorking from "./assets/images/illustration-working.svg";
+import LinkShortner from "./components/LinkShortner";
+import LinkShortnerForm from "./components/LinkShortnerForm";
+import LinkShortnerItem from "./components/LinkShortnerItem";
 
 import { mainNavLinks } from "./data/mainNavLinks";
+import { shortnerLinks } from "./data/shortnerLinks";
 
 function App() {
   return (
@@ -56,6 +60,16 @@ function App() {
           />
         </Hero>
       </Header>
+      <LinkShortner id="shorten" ariaLabel="Link Shortner">
+        <LinkShortnerForm id="link-form" />
+        {shortnerLinks.map((link) => (
+          <LinkShortnerItem
+            key={link.id}
+            originalURL={link.originalURL}
+            shortURL={link.shortURL}
+          />
+        ))}
+      </LinkShortner>
     </>
   );
 }
