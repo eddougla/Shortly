@@ -6,6 +6,10 @@ import Logo from "./components/Logo";
 import MainNavLinks from "./components/MainNavLinks";
 import LinkItem from "./components/LinkItem";
 import AuthButtons from "./components/AuthButtons";
+import Hero from "./components/Hero";
+import HeroContent from "./components/HeroContent";
+import HeroIllustration from "./components/HeroIllustration";
+import illustrationWorking from "./assets/images/illustration-working.svg";
 
 import { mainNavLinks } from "./data/mainNavLinks";
 
@@ -38,6 +42,19 @@ function App() {
             />
           </DesktopMenu>
         </MainNavigation>
+        <Hero id="hero" label="hero-heading">
+          <HeroContent
+            heading="More than just shorter links"
+            description="Build your brand's recognition and get detailed insights on how your links are performing."
+            ctaLabel="Get Started"
+            ctaLink="#"
+            ariaLabel="Get started with link shortening"
+          />
+          <HeroIllustration
+            image={illustrationWorking}
+            altText="Person working on a laptop with analytics and link management tools"
+          />
+        </Hero>
       </Header>
     </>
   );
