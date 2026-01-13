@@ -1,3 +1,5 @@
+import { AnimatePresence } from "framer-motion";
+import { useState, useCallback } from "react";
 import Header from "./components/Header";
 import MainNavigation from "./components/MainNavigation";
 import DesktopMenu from "./components/DesktopMenu";
@@ -16,19 +18,36 @@ import LinkShortnerItem from "./components/LinkShortnerItem";
 import Statistics from "./components/Statistics";
 import Features from "./components/Features";
 import FeatureCard from "./components/FeatureCard";
+import CTA from "./components/CTA";
+import Footer from "./components/Footer";
+import FooterNavigation from "./components/FooterNavigation";
+import FooterColumn from "./components/FooterColumn";
+import FooterNavLinks from "./components/FooterNavLinks";
+import MobileMenuButton from "./components/MobileMenuButton";
+import MobileMenu from "./components/MobileMenu";
+import MobileNavLinkList from "./components/MobileNavLinkList";
+import SocialLinks from "./components/SocialLinks";
+import SocialLink from "./components/SocialLink";
 
 import { mainNavLinks } from "./data/mainNavLinks";
 import { shortnerLinks } from "./data/shortnerLinks";
 import { features } from "./data/features";
+import { footerNavLinks } from "./data/footerNavLinks";
+import { socialLinks } from "./data/socialLinks";
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
+
   return (
     <>
       <Header id="header">
         <MainNavigation label="Main navigation">
           <DesktopMenu>
             <LogoAndNavLinks>
-              <Logo altText="Company logo" />
+              <Logo altText="Company logo" ariaLabel="Homepage" />
               <MainNavLinks>
                 {mainNavLinks.map((link) => (
                   <LinkItem key={link.label}>
@@ -48,7 +67,19 @@ function App() {
               signUpLabel="Sign Up"
               signUpLink="#"
             />
+            <MobileMenuButton
+              onClick={toggleMenu}
+              type="button"
+              isMenuOpen={isMenuOpen}
+            />
           </DesktopMenu>
+          <AnimatePresence>
+            {isMenuOpen && mainNavLinks?.length > 0 && (
+              <MobileMenu id="mobile-menu">
+                <MobileNavLinkList links={mainNavLinks} onClick={toggleMenu} />
+              </MobileMenu>
+            )}
+          </AnimatePresence>
         </MainNavigation>
         <Hero id="hero" label="hero-heading">
           <HeroContent
@@ -93,6 +124,38 @@ function App() {
           />
         ))}
       </Features>
+      <CTA
+        id="cta"
+        ariaLabel="Call to action"
+        heading="Boost your links today"
+      />
+      <Footer ariaLabel="Site footer">
+        <Logo altText="Company logo" ariaLabel="Homepage" className="h-8" />
+        <FooterNavigation ariaLabel="Footer Navigation">
+          {footerNavLinks.map((column) => (
+            <FooterColumn key={column.id} title={column.title}>
+              {column.links.map((link) => (
+                <FooterNavLinks
+                  key={link.label}
+                  label={link.label}
+                  href={link.href}
+                />
+              ))}
+            </FooterColumn>
+          ))}
+        </FooterNavigation>
+        <SocialLinks role="navigation" ariaLabel="Social media links">
+          {socialLinks.map((link) => (
+            <SocialLink
+              key={link.name}
+              name={link.name}
+              icon={link.icon}
+              link={link.href}
+              ariaLabel={link.ariaLabel}
+            />
+          ))}
+        </SocialLinks>
+      </Footer>
     </>
   );
 }

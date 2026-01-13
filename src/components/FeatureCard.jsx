@@ -10,7 +10,7 @@ function FeatureCard({
       className={`relative flex flex-col p-6 space-y-6 bg-white rounded-lg shadow-sm md:w-1/3 ${className}`}
     >
       <div className="absolute -ml-10 -top-10 md:left-16 left-1/2">
-        <div class="flex items-center justify-center w-20 h-20 p-4 rounded-full bg-veryDarkViolet">
+        <div className="flex items-center justify-center w-20 h-20 p-4 rounded-full bg-veryDarkViolet">
           <img src={icon} alt={iconAltText} />
         </div>
       </div>
