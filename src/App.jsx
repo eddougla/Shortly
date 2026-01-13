@@ -13,9 +13,13 @@ import illustrationWorking from "./assets/images/illustration-working.svg";
 import LinkShortner from "./components/LinkShortner";
 import LinkShortnerForm from "./components/LinkShortnerForm";
 import LinkShortnerItem from "./components/LinkShortnerItem";
+import Statistics from "./components/Statistics";
+import Features from "./components/Features";
+import FeatureCard from "./components/FeatureCard";
 
 import { mainNavLinks } from "./data/mainNavLinks";
 import { shortnerLinks } from "./data/shortnerLinks";
+import { features } from "./data/features";
 
 function App() {
   return (
@@ -70,6 +74,25 @@ function App() {
           />
         ))}
       </LinkShortner>
+      <Statistics
+        id="stats"
+        heading="Advanced Statistics"
+        description="Track how your links are performing across the web with our advanced
+        statistics dashboard."
+        ariaLabel="stats-heading"
+      />
+      <Features id="features" ariaLabel="Features">
+        {features.map((feature) => (
+          <FeatureCard
+            key={feature.id}
+            icon={feature.icon}
+            iconAltText={feature.iconAltText}
+            title={feature.title}
+            description={feature.desription}
+            className={feature.className}
+          />
+        ))}
+      </Features>
     </>
   );
 }
